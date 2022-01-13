@@ -31,8 +31,33 @@ export default function Header({ lFacade, loggedIn }) {
               >
                 Cars
               </NavLink>
-            </li>
+            </li>            
           </div>
+        )}
+        {lFacade.hasUserAccess("admin", loggedIn) && (
+        <div className="div">
+          <li>
+          <NavLink
+            exact
+            activeClassName="selected"
+            className="leftF"
+            to="/addrace"
+          >
+            Add Race
+          </NavLink>
+        </li>
+        <li>
+        <NavLink
+          exact
+          activeClassName="selected"
+          className="leftF"
+          to="/carlistadmin"
+        >
+          Cars
+        </NavLink>
+      </li>
+      </div>
+        
         )}
 
         <li>

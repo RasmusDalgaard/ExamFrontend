@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { NavLink } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function RaceList({ aFacade, setErrorMessage }) {
@@ -20,27 +23,35 @@ const getAllRaces = (data) => {
   return (
     <div className="row">
       {allRaces.map((race) => (
-            <table>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Date</th>
-              <th>Location</th>
-              <th>Time</th>
-            </tr>
-            <tr>
-              <td>{race.id}</td>
-              <td>{race.name}</td>
-              <td>{race.date}</td>
-              <td>{race.location}</td>
-              <td>{race.time}</td>
-            </tr>
-            <tr>
-              <td>Centro comercial Moctezuma</td>
-              <td>Francisco Chang</td>
-              <td>Mexico</td>
-            </tr>
-          </table>
+            <Table className="table table-striped table-dark">
+            <thead>
+              <tr className="">
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Location</th>
+                <th scope="col">Cars</th>
+                <th scope="col">Drivers</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th key={uuidv4()}scope="row">{race.id}</th>
+                <td key={uuidv4()}>{race.name}</td>
+                <td key={uuidv4()}>{race.date}</td>
+                <td key={uuidv4()}>{race.time}</td>
+                <td key={uuidv4()}>{race.location}</td>
+                <NavLink to={`/carsinrace/${race.id}`}>
+                <td><button>Cars</button></td>
+                </NavLink>
+                <NavLink to={`/driversinrace/${race.id}`}>
+                <td><button>Drivers</button></td>
+                </NavLink>
+                
+              </tr>
+            </tbody>
+          </Table>
           ))}
     </div>
   );

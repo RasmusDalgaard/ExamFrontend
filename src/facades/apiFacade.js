@@ -2,13 +2,6 @@ import lFacade from "./loginFacade";
 
 const url = "http://localhost:8080/exambackend";
 
-function handleHttpErrors(res) {
-  if (!res.ok) {
-    return Promise.reject({ status: res.status, fullError: res.json() });
-  }
-  return res.json();
-}
-
 let apiFacade = () => {
   const fetchData = (endpoint, updateAction, SetErrorMessage) => {
     const options = makeOptions("GET", true); //True add's the token
@@ -25,44 +18,8 @@ let apiFacade = () => {
       });
   };
 
-  const fetchFavourites = (endpoint, updateAction, SetErrorMessage) => {
-    const username = lFacade.getUsername();
-    console.log(username);
-    const body = { username: username };
-    console.log(body);
-    const options = makeOptions("POST", true, body); //True add's the token
-    return fetch(url + "/api/" + endpoint, options)
-      .then(handleHttpErrors)
-      .then((data) => updateAction(data))
-      .catch((err) => {
-        if (err.status) {
-          console.log(err);
-          err.fullError.then((e) => SetErrorMessage(e.code + ": " + e.message));
-        } else {
-          SetErrorMessage("Network error");
-        }
-      });
-  };
-
-  const postData = (endpoint, updateAction, SetErrorMessage) => {
-    const options = makeOptions("POST", true);
-    return fetch(url + "/api/" + endpoint, options)
-      .then(handleHttpErrors)
-      .then((data) => updateAction(data))
-      .catch((err) => {
-        if (err.status) {
-          console.log(err);
-          err.fullError.then((e) => SetErrorMessage(e.code + ": " + e.message));
-        } else {
-          SetErrorMessage("Network error");
-        }
-      });
-  };
-
   const putData = (endpoint, updateAction, SetErrorMessage) => {
-    const username = lFacade.getUsername;
-    const body = { username: `${username}` };
-    const options = makeOptions("PUT", true, body);
+    const options = makeOptions("PUT", true);
     return fetch(url + "/api/" + endpoint, options)
       .then(handleHttpErrors)
       .then((data) => updateAction(data))
@@ -75,6 +32,52 @@ let apiFacade = () => {
         }
       });
   };
+
+  const deleteData = (endpoint, updateAction, SetErrorMessage) => {
+    const options = makeOptions("DELETE", true);
+    return fetch(url + "/api/" + endpoint, options)
+      .then(handleHttpErrors)
+      .then((data) => updateAction(data))
+      .catch((err) => {
+        if (err.status) {
+          console.log(err);
+          err.fullError.then((e) => SetErrorMessage(e.code + ": " + e.message));
+        } else {
+          SetErrorMessage("Network error");
+        }
+      });
+  };
+
+  const postRace = (
+    name,
+    date,
+    time,
+    location,
+    endpoint,
+    updateAction,
+    setErrorMessage
+  ) => {
+    const newRace = { name: name, date: date, time: time, location: location };
+    console.log(newRace);
+    const options = makeOptions("POST", true, newRace);
+    return fetch(url + "/api/" + endpoint, options)
+      .then((data) => updateAction(data))
+      .then(handleHttpErrors)
+      .catch((err) => {
+        if (err.status) {
+          err.fullError.then((e) => setErrorMessage(e.code + ": " + e.message));
+        } else {
+          setErrorMessage("Network error");
+        }
+      });
+  };
+
+  function handleHttpErrors(res) {
+    if (!res.ok) {
+      return Promise.reject({ status: res.status, fullError: res.json() });
+    }
+    return res.json();
+  }
 
   const makeOptions = (method, addToken, body) => {
     var opts = {
@@ -96,9 +99,11 @@ let apiFacade = () => {
   };
 
   return {
+    deleteData,
+    putData,
+    postRace,
     makeOptions,
     fetchData,
-    fetchFavourites,
     handleHttpErrors,
     url,
   };
