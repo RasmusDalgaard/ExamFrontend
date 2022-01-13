@@ -1,0 +1,56 @@
+.buttonBG {
+  background-color: #744b2a;
+  border-radius: 15px;
+  margin-right: 10px;
+  color: #fcd144;
+}
+
+ul.buttonBG li a {
+  display: block;
+  color: #fcd144;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+ul.buttonBG li a:hover:not(.active) {
+  color: #fcd144;
+  background-color: #5e5e5b;
+  transform: scale(1.125);
+  border-radius: 10px;
+}
+
+.contentBG {
+  background-color: #ece3ca;
+  border-radius: 2px;
+  height: 100%;
+  border: #f3eddd solid 30px;
+  opacity: 0.9;
+}
+
+.functionalBG {
+  background-color: #ece3ca;
+  border-radius: 2px;
+  border: #f3eddd solid 30px;
+  opacity: 0.9;
+  width: 30%;
+  margin: auto;
+}
+
+.customM {
+  padding-top: 1%;
+  background-color: black;
+}
+
+.zoom {
+  padding-bottom: 3%;
+  transition: transform 0.2s; /* Animation */
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(
+    1.5
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}

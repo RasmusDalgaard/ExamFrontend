@@ -1,0 +1,40 @@
+ul.header {
+  list-style-type: none;
+  margin-top: 0;
+  padding: 10px;
+  overflow: hidden;
+  background-color: #554131;
+  border-radius: 10px;
+}
+
+/*
+  ul.header li {
+    float: left;
+  }
+  */
+
+.rightF {
+  float: right;
+}
+.leftF {
+  float: left;
+}
+
+ul.header li a {
+  display: block;
+  color: #fcd144;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+ul.header li a:hover:not(.active) {
+  background-color: #5e5e5b;
+  transform: scale(1.125);
+  border-radius: 10px;
+}
+
+.selected {
+  background-color: #333;
+}
