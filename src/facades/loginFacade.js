@@ -1,5 +1,5 @@
 import aFacade from "./apiFacade";
-const URL = "http://localhost:8080/exambackend";
+const URL = "https://rapperd.dk/tomcat/exambackend";
 
 function handleHttpErrors(res) {
   if (!res.ok) {
