@@ -8,6 +8,7 @@ import CarList from "./components/CarList";
 import CarsInRace from "./components/CarsInRace";
 import DriversInRace from "./components/DriversInRace";
 import CarListAdmin from "./components/CarListAdmin";
+import ConnectRace from "./components/ConnectRace";
 import AddRace from "./components/AddRace";
 import aFacade from "./facades/apiFacade";
 import lFacade from "./facades/loginFacade";
@@ -71,6 +72,14 @@ function App() {
           <Route path="/carlistadmin">
             {lFacade.hasUserAccess("admin", loggedIn) && (
               <CarListAdmin
+                aFacade={aFacade}
+                setErrorMessage={setErrorMessage}
+              />
+            )}
+          </Route>
+          <Route path="/connectrace">
+            {lFacade.hasUserAccess("admin", loggedIn) && (
+              <ConnectRace
                 aFacade={aFacade}
                 setErrorMessage={setErrorMessage}
               />

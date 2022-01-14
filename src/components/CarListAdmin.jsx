@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Table} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { v4 as uuidv4 } from 'uuid';
+import { NavLink } from "react-router-dom";
 
 
 export default function CarListAdmin({ aFacade, setErrorMessage }) {
@@ -40,18 +42,22 @@ const updateDelete = (data) => {
                 <th scope="col">Brand</th>
                 <th scope="col">Make</th>
                 <th scope="col">Year</th>
+                <th scope="col">Connect</th>
+                <th scope="col">Delete</th>
+                
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th key={car.id}scope="row">{car.id}</th>
-                <td key={car.id}>{car.name}</td>
-                <td key={car.id}>{car.brand}</td>
-                <td key={car.id}>{car.make}</td>
-                <td key={car.id}>{car.year}</td>    
-                
-                <td><button id={car.id} onClick={deleteCar}>Delete</button></td>
-                       
+                <th key={uuidv4()}scope="row">{car.id}</th>
+                <td key={uuidv4()}>{car.name}</td>
+                <td key={uuidv4()}>{car.brand}</td>
+                <td key={uuidv4()}>{car.make}</td>
+                <td key={uuidv4()}>{car.year}</td>
+                <NavLink to={`/connectrace/${car.id}`}>
+                <button id={car.id}>Connect to race</button>
+                </NavLink>    
+                <td><button id={car.id} onClick={deleteCar}>Delete</button></td>   
               </tr>
             </tbody>
           </Table>

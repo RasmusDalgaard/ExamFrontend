@@ -18,8 +18,8 @@ let apiFacade = () => {
       });
   };
 
-  const putData = (endpoint, updateAction, SetErrorMessage) => {
-    const options = makeOptions("PUT", true);
+  const putData = (endpoint, updateAction, SetErrorMessage, data) => {
+    const options = makeOptions("PUT", true, data);
     return fetch(url + "/api/" + endpoint, options)
       .then(handleHttpErrors)
       .then((data) => updateAction(data))
