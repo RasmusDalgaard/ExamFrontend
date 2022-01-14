@@ -1,6 +1,6 @@
 import lFacade from "./loginFacade";
 
-const url = "http://localhost:8080/exambackend";
+const url = "https://rapperd.dk/tomcat/exambackend";
 
 let apiFacade = () => {
   const fetchData = (endpoint, updateAction, SetErrorMessage) => {
